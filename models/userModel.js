@@ -1,23 +1,40 @@
 const fs = require("fs");
+const path = require("path");
 
 // Setting up base users list
-users_list = [
-  {
-    id: 1,
-    name: "Orbán Viktor",
-    email: "viktor.orban@magyaro.gov.hu",
-    about: "I am a very nice and not at all corrupt politician.",
-    image: "../public/uploads/1.jpg",
-  },
-  {
-    id: 2,
-    name: "Szijjártó Péter",
-    email: "petya.latya@freemail.hu",
-    about:
-      "I am a very nice and not at all corrupt minister of foreign affairs.",
-    image: "../public/uploads/2.jpg",
-  },
-];
+// let users_list = [
+//   {
+//     id: 1,
+//     name: "Orbán Viktor",
+//     email: "viktor.orban@magyaro.gov.hu",
+//     about: "I am a very nice and not at all corrupt politician.",
+//     image: "1.jpg",
+//   },
+//   {
+//     id: 2,
+//     name: "Szijjártó Péter",
+//     email: "petya.latya@freemail.hu",
+//     about:
+//       "I am a very nice and not at all corrupt minister of foreign affairs.",
+//     image: "2.jpg",
+//   },
+// ];
+
+// Setting up base users list with external json file
+const dataPath = path.join(__dirname, "../data/users.json");
+let users_list = [];
+fs.readFile(dataPath, (err, data) => {
+  if (err) throw err;
+  let parsedData = JSON.parse(data);
+  users_list = parsedData.users;
+});
+
+// Save users to JSON file
+function saveUsers() {
+  fs.writeFile(dataPath, JSON.stringify(users_list), (err) => {
+    if (err) throw err;
+  });
+}
 
 // Setting up the model functions
 // Getting all users
@@ -43,6 +60,7 @@ function createUser(body, image) {
   // TODO: Error handling and checking if image is a jpg or png
   image.mv(`./public/uploads/${nextId}.jpg`);
   users_list.push(user);
+  saveUsers();
 }
 
 // Editing a user
@@ -51,6 +69,7 @@ function updateUser(id, body) {
   user.name = body.name;
   user.email = body.email;
   user.about = body.about;
+  saveUsers();
 }
 
 // Deleting a user
@@ -64,6 +83,7 @@ function deleteUser(id) {
       return;
     }
   });
+  saveUsers();
 }
 
 // Exporting for controller
