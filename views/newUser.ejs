@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" />
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Node.js Assignment</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Users page</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- TODO: Creae a nice-looking Bootstrap form with which we can edit these properties of a user: -->
+    <!-- 1. Name - regular text input -->
+    <!-- 2. E-mail - email text input -->
+    <!-- 3. About - textarea input -->
+    <!-- (If we can do it) -->
+    <!-- 4. Image - an image upload field, which in the end deletes the already uploaded one / overwrites it with the current one -->
+    <!-- 5. Submit button -->
+    <!-- 6. Cancel button -->
+    <div class="container my-5">
+      <h2>Please input your information:</h2>
+      <form action="/users/new" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input
+            type="text"
+            name="name"
+            id="name"
+            placeholder="Please input your name"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Please input your email"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <label for="about" class="form-label">About</label>
+          <textarea
+            name="about"
+            id="about"
+            placeholder="Please write about yourself in a few sentences"
+            class="form-control"
+            required
+          ></textarea>
+        </div>
+        <div class="mb-5">
+          <label for="image" class="form-label">Image</label>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            accept=".jpg"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="mb-3">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <a href="/users" class="btn btn-outline-danger mx-2">Cancel</a>
+        </div>
+      </form>
+    </div>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

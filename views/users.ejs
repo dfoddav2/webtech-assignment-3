@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" />
+    <title>Users</title>
+    <link rel="stylesheet" href="../styles/index.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Node.js Assignment</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Users page</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container py-5">
+      <h1 class="display-5 fw-bold">Welcome to the users page!</h1>
+      <p class="col-md-10 fs-4">
+        Here you can check out all the users, create a new one, or even edit /
+        delete existing users.
+      </p>
+      <a href="/users/new" class="btn btn-primary btn-lg">Create a new user</a>
+    </div>
+    <!-- TODO: Creating a loop iterating over each user of the users list - getUsers  -->
+    <!-- DISPLAYING: we display the information using Bootstrap cards, with each card having the following: -->
+    <!-- 1. Slight animation on hover and clickable to show the user -->
+    <!-- 2. user.name as title of the card -->
+    <!-- 3. user.about as the content of the card -->
+    <!-- 4. In the end two buttons on the card - 1 for editing the user, 1 for deleting the user -->
+    <div class="container">
+      <div class="row g-0 justify-content-around">
+        <% if (users_list.length === 0) { %>
+        <h2>No users found.</h2>
+        <% } else { %> <% for (let i = 0; i < users_list.length; i++) { %>
+        <div class="card m-4" style="width: 22rem">
+          <img
+            src="/uploads/<%= users_list[i].id %>.jpg"
+            class="card-img-top"
+            alt="Image of the user: <%= users_list[i].name %>"
+            style="width: 100%; height: 15rem; object-fit: cover"
+          />
+          <div class="card-body">
+            <h5 class="card-title"><%= users_list[i].name %></h5>
+            <p class="card-text"><%= users_list[i].email %></p>
+            <div class="d-flex justify-content-around">
+              <a href="/users/<%= users_list[i].id %>" class="btn btn-primary"
+                >See User</a
+              >
+              <a
+                href="/users/<%= users_list[i].id %>/edit"
+                class="btn btn-outline-light"
+                >Edit User</a
+              >
+              <button
+                class="btn btn-outline-danger"
+                onclick="deleteUser('<%= users_list[i].id %>')"
+              >
+                Delete User
+              </button>
+            </div>
+          </div>
+        </div>
+        <% }} %>
+      </div>
+      <div class="mt-5"></div>
+    </div>
+    <script>
+      function deleteUser(userId) {
+        var url = "/users/" + userId;
+        fetch(url, {
+          method: "DELETE",
+        })
+          .then(() => {
+            console.log("Redirecting to users page...");
+            window.location.href = "/users";
+          })
+          .catch((err) => console.log(err));
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
