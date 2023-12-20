@@ -12,12 +12,11 @@ router.post("/new", userController.createUser);
 router.get("/:id", userController.getUser);
 // Routes for editing a user's data
 router.get("/:id/edit", userController.editUser);
-// put would be more semantically coreect, but could not make method-override package work, so this will stay as a post
+// Put would be more semantically coreect, but could not make method-override package work, so this will stay as a post for now
 router.post("/:id/edit", userController.updateUser);
 // Route for deleting a user
 // Here the delete method makes more sense, thus that is what I did, using a button
 router.delete("/:id", userController.deleteUser);
-
 
 // Exporting for app.js
 module.exports = router;

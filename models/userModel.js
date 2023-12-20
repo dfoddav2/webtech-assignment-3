@@ -2,6 +2,7 @@ const fs = require("fs");
 const path = require("path");
 
 // Setting up base users list
+// REPLACED WITH EXTERNAL JSON FILE
 // let users_list = [
 //   {
 //     id: 1,
@@ -20,14 +21,18 @@ const path = require("path");
 //   },
 // ];
 
+// CHANGE: Moved to external JSON file
+// Logic is pretty simple, we read the file on startup, and save it on every change.
+// Since we don't only save to the JSON but also the local users_list variable, we can use that for the rest of the app.
+// We do not need to read the JSON every time.
 // Setting up base users list with external json file
 const dataPath = path.join(__dirname, "../data/users.json");
 let users_list = [];
 fs.readFile(dataPath, (err, data) => {
   if (err) throw err;
-  let parsedData = JSON.parse(data);
-  users_list = parsedData.users;
+  users_list = JSON.parse(data);
 });
+
 
 // Save users to JSON file
 function saveUsers() {

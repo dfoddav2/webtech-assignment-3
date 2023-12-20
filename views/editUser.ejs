@@ -3,8 +3,23 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="author" />
-    <link rel="stylesheet" href="../styles/index.css" />
+    <meta
+      name="description"
+      content="Edit specific user page of the Node.js assignment for Web Technologies WS2023/24."
+    />
+    <meta
+      name="keywords"
+      content="Node.js, Web Technologies, Assignment, WS2023/24"
+    />
+    <meta
+      name="author"
+      content="David Fodor, Erik Berger, Max Something, Something Something"
+    />
+    <% if (user) { %>
+    <title>Edit <%= user.name %></title>
+    <% } else { %>
+    <title>User not found</title>
+    <% } %>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -33,20 +48,12 @@
               <a class="nav-link" href="/">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link active" href="#">Users page</a>
+              <a class="nav-link active" href="/users">Users page</a>
             </li>
           </ul>
         </div>
       </div>
     </nav>
-    <!-- TODO: Creae a nice-looking Bootstrap form with which we can edit these properties of a user: -->
-    <!-- 1. Name - regular text input -->
-    <!-- 2. E-mail - email text input -->
-    <!-- 3. About - textarea input -->
-    <!-- (If we can do it) -->
-    <!-- 4. Image - an image upload field, which in the end deletes the already uploaded one / overwrites it with the current one -->
-    <!-- 5. Submit button -->
-    <!-- 6. Cancel button -->
     <div class="container my-5">
       <% if (!user) { %>
       <h2>No user found with that ID. Please go back to users page.</h2>
@@ -86,11 +93,19 @@
             placeholder="Please write about yourself in a few sentences"
             class="form-control"
             required
-          ><%= user.about %></textarea>
+          >
+<%= user.about %></textarea
+          >
         </div>
         <div class="mb-5">
           <label for="image" class="form-label">Image</label>
-          <input type="file" name="image" id="image" class="form-control" accept=".jpg"/>
+          <input
+            type="file"
+            name="image"
+            id="image"
+            class="form-control"
+            accept=".jpg"
+          />
         </div>
         <div class="mb-3">
           <button type="submit" class="btn btn-primary">Submit</button>

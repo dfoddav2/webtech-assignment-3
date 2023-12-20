@@ -20,18 +20,16 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(fileUpload());
-// Setting up the uploads directory as a static directory
+// Setting up the public directory as static to easily access the files in it
 app.use(express.static("public"));
 
 // Setting up the view engine
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
-// Setting up routers / routes
+// Setting up and using routers / routes
 const indexRouter = require("./routes/index");
 const usersRouter = require("./routes/users");
-
-// Using the routers / routes
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
 

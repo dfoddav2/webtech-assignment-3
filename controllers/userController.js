@@ -1,8 +1,10 @@
+// Importing the userModel to use its functions / logic
 const userModel = require("../models/userModel.js");
 
 // Setting up the controller functions
 // Getting all users
 function getUsers(req, res) {
+    // console.log(userModel.getUsers())
     res.render("users", {users_list: userModel.getUsers()});
 }
 
